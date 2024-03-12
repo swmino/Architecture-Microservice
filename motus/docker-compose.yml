@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  motus:
+    image: motus_image
+    ports:
+      - "3000:3000"  # Assurez-vous que le port exposé correspond au port sur lequel votre application écoute
