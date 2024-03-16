@@ -1,24 +1,25 @@
-// COTE CLIENT
+console.log("Je suis dans motus")
 
-
+// Déclarer une variable pour compter le nombre de tentatives
+let numberOfAttempts = 0;
 
 // Fonction pour effacer le contenu de l'input de texte
 function clearInput() {
   document.getElementById('mot').value = '';
 }
 
-// Sélectionner le formulaire
 const motusForm = document.getElementById('motusForm');
-
 // Sélectionner la div de résultat
 const resDiv = document.querySelector('.res');
 // Sélectionner la div du message
 const messageDiv = document.querySelector('.message');
 
-// Écouter l'événement de soumission du formulaire
 motusForm.addEventListener('submit', function(event) {
     // Empêcher le comportement par défaut du formulaire
     event.preventDefault();
+    console.log("on est daans le addeventlistener du submit ")
+    // Incrémenter le nombre de tentatives à chaque fois que le joueur soumet le formulaire
+    numberOfAttempts++;
 
     // Récupérer la valeur de l'input texte
     const motInput = document.getElementById('mot');
@@ -32,7 +33,6 @@ motusForm.addEventListener('submit', function(event) {
             // Récupérer le mot de la réponse et le convertir en minuscules pour la comparaison
             const motPageWord = xhr.responseText.trim().toLowerCase();
  
-            // Initialiser la chaîne de résultats
             let resultat = '';
 
             // Parcourir chaque lettre du mot entré par l'utilisateur
@@ -55,12 +55,16 @@ motusForm.addEventListener('submit', function(event) {
             // Vérifier si le mot est correct
             const estCorrect = motValeur === motPageWord;
 
-            // Si le mot est correct, afficher le message de félicitations
             if (estCorrect) {
                 // Cacher le formulaire
                 motusForm.style.display = 'none';
                 // Afficher le message de félicitations avec le mot correct dans la div du message
                 messageDiv.textContent = "Félicitations, le mot était " + motPageWord;
+                console.log("Nombre d'essaie")
+                console.log(numberOfAttempts)
+                // Enregistrer le score du joueur
+                
+                setScore(numberOfAttempts);
             } else {
                 // Afficher le résultat dans la div de résultat
                 resDiv.innerHTML += "<br>" + resultat;
@@ -73,15 +77,18 @@ motusForm.addEventListener('submit', function(event) {
 });
 
 // Fonction pour enregistrer le score du joueur
-function setScore() {
-    // Récupérer le nom du joueur (remplacez playerName par la méthode appropriée pour obtenir le nom du joueur)
+function setScore(score) {
+    // Récupérer le nom du joueur
+    console.log("on est dans le set score du motus")
     const playerName = document.getElementById('playerName').value;
-
+    console.log("Nom du joueur")
+    console.log(playerName)
     // Créer un objet avec les données du score
     const scoreData = {
         playerName: playerName,
-        // Autres données du score à envoyer
+        attemptsToFind: score
     };
+    console.log(scoreData)
 
     // Effectuer une requête AJAX pour enregistrer le score
     const xhr = new XMLHttpRequest();
@@ -94,6 +101,9 @@ function setScore() {
             console.error('Erreur lors de l\'enregistrement du score.');
         }
     };
+    xhr.onerror = function() {
+        console.error('Erreur AJAX lors de l\'enregistrement du score.');
+    };
     xhr.send(JSON.stringify(scoreData));
 }
 
@@ -101,6 +111,8 @@ function setScore() {
 function getScore(playerName) {
     // Effectuer une requête AJAX pour récupérer le score du joueur
     const xhr = new XMLHttpRequest();
+    console.log("on est dans le get score du motus")
+
     xhr.open('GET', `/getscore?playerName=${playerName}`, true);
     xhr.onload = function() {
         if (xhr.status === 200) {
@@ -109,6 +121,9 @@ function getScore(playerName) {
         } else {
             console.error('Erreur lors de la récupération du score.');
         }
+    };
+    xhr.onerror = function() {
+        console.error('Erreur AJAX lors de la récupération du score.');
     };
     xhr.send();
 }

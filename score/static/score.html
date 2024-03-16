@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="mutos">Score </div>
+
+    <a class ="mutos" href="http://localhost:3000" id="linkScores" style="font-size: 15px;"></a>>Retour au jeu</a>
+
+    <!-- Conteneur pour afficher les scores -->
+    <div id="mainContent">
+        <!-- Le contenu des scores sera ajouté ici via JavaScript -->
+    </div>
+
+    <script>
+        // Effectuer une requête AJAX pour récupérer les scores depuis le serveur
+        $.ajax({
+            url: '/getscore', // L'URL de la route pour récupérer les scores
+            method: 'GET',
+            //data: { playerName: 'playername' }
+            success: function(scores) {
+                // Afficher les scores dans la div scoresContainer
+                $('#scoresContainer').html(scores);
+            },
+            error: function(err) {
+                console.error('Erreur lors de la récupération des scores :', err);
+            }
+        });
+    </script>
+</body>
+</html>

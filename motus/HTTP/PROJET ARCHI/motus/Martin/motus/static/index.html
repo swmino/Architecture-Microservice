@@ -1,0 +1,27 @@
+<!-- Pour lancer le serv en local manuellement, aller au niveau du répertoire de WordFinder.js puis faire "node Wordfinder.js &" ne pas oublier de kill le processus en partant -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motus</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Contenu de votre site -->
+    <h1>Motus v2</h1>
+    <div class="container">
+        <div>
+            <form id="motusForm" method="post">
+                <label for="nom">Entrez le mot:</label><br>
+                <input type="text" id="mot" name="mot"><br><br>
+                <input type="submit" value="Tester">
+            </form> 
+        </div>
+    </div>
+    
+    <script src="motus.js"></script>
+    <!-- <script>$.get(`/word`, (data)=> {console.log(data)})</script> -->
+</body>
+</html>

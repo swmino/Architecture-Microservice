@@ -1,0 +1,37 @@
+/* index.css */
+
+/* Styles généraux */
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+/* Styles spécifiques aux formulaires */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Styles pour les liens */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

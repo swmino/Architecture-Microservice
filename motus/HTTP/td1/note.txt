@@ -1,0 +1,42 @@
+
+Exo 1
+
+telnet www.google.fr 80 ouvrir le tunnel
+
+GET / HTTP/1.1
+Host: www.google.fr
+GET /search?q=chat HTTP/1.1 (version 1.1)
+
+
+
+Exo 2
+
+curl http://www.google.fr > output.txt
+
+
+Exo 3
+
+wget -O output.html http://www.google.fr
+
+Exo 4
+
+ecriture de la commande, envoie de la sortie standard aprés le pipe
+echo -e "GET / HTTP/1.1\nHost: www.google.fr\n\n" | nc www.google.fr 80 > output-4.txt
+
+différence get, curl , wget, et netcat -> curl transfers de données, wget comme curl avec des options, netcat 
+
+
+wget -O output_exo5.html "https://www.stocklib.fr/search?q=les+chats"
+
+
+Exo 5
+
+
+
+
+
+Exo 6
+
+
+
+

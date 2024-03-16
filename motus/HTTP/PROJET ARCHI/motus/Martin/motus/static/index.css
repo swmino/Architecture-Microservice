@@ -1,0 +1,8 @@
+.container{
+    display : flex;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.green { background-color: green; }
+.orange { background-color: orange; }

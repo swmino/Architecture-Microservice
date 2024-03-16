@@ -3,19 +3,18 @@ const fs = require('fs');
 const crypto = require('crypto');
 const os = require('os');
 
+console.log("Je suis dans wordfinder")
 const app = express();
 
 app.use(express.static('static'));
 
-// Read the word list from the text file and store it in an array variable
 const wordList = fs.readFileSync('data/liste_francais.txt', 'utf-8').split('\n').map(word => word.trim());
 
-// Generate a deterministic random number based on the current date
 function generateRandomNumber() {
-    const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
-    const hash = crypto.createHash('sha256').update(date).digest('hex'); // Generate SHA-256 hash
-    const randomSeed = parseInt(hash.slice(0, 16), 16); // Extract the first 16 characters and convert to integer
-    return randomSeed % wordList.length; // Modulo operation to get a number within the range of wordList length
+    const date = new Date().toISOString().slice(0, 10); 
+    const hash = crypto.createHash('sha256').update(date).digest('hex'); 
+    const randomSeed = parseInt(hash.slice(0, 16), 16); 
+    return randomSeed % wordList.length; 
 }
 
 // Trouve un mot aléatoire à partir d'un nombre
@@ -49,7 +48,6 @@ app.on('request', (req, res) => {
     }
   });
 
-// Ignore requests for favicon.ico
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 // Start the server

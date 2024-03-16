@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Motus</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Motus</h1>
+            <p>Connexion </p>
+            <form method="get" action="/signin_process">
+                <div class="form-group">
+                    <label for="email">mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required="true">
+                    <label for="password">password</label>
+                    <input type="password" class="form-control" id="password" name="password" required="true">
+                    <label for="password2">password confirmation</label>
+                    <input type="password" class="form-control" id="password2" name="password2" required="true">
+                    <input type="submit" class="btn btn-primary" id="submit" name="submit" value="S'inscrire">
+                </div>
+            </form>
+            <br><a href="/"><button class="btn btn-primary">Se connecter</button></a>
+        </div>
+    </body>
+</html>

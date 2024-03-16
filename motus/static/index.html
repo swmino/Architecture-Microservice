@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="mutos">Mutos</div>
-    <div class="container" id="container">
+    <a class="mutos" href="http://localhost:3001/score" id="linkScores" style="display: none; font-size: 15px;">Voir les scores</a>
+        <div class="container" id="container">
         <!-- Formulaire pour entrer le nom d'utilisateur -->
         <form id="usernameForm">
             <label for="username">Entrez votre nom d'utilisateur :</label>
@@ -27,27 +28,24 @@
         </form> 
         <div class="message"></div>
         <div class="res">
-            mots testés :
+            Mot testé :
         </div>
     </div>
     
     <script src="motus.js"></script>
     <script>
-        // Écouter l'événement de soumission du formulaire pour le nom d'utilisateur
         const usernameForm = document.getElementById('usernameForm');
         usernameForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            
-            // Récupérer le nom d'utilisateur
+            console.log("on est bien rentré dans le add Event Lister");
             const username = document.getElementById('playerName').value;
-
+            document.getElementById('linkScores').style.display = 'block';
             // Cacher le formulaire pour le nom d'utilisateur
             document.getElementById('container').style.display = 'none';
 
             // Afficher le reste de la page
             document.getElementById('mainContent').style.display = 'block';
 
-            // Mettre à jour le champ caché playerName avec le nom d'utilisateur
             document.getElementById('playerName').value = username;
         });
     </script>
