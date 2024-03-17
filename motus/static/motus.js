@@ -1,4 +1,24 @@
-console.log("Je suis dans motus")
+
+// Formulaire pour la solution alternatvive d'authentification sans bdd
+const usernameForm = document.getElementById('usernameForm');
+usernameForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    console.log("on est bien rentré dans le add Event Lister");
+    const username = document.getElementById('playerName').value;
+    document.getElementById('linkScores').style.display = 'block';
+    // Cacher le formulaire pour le nom d'utilisateur
+    document.getElementById('container').style.display = 'none';
+
+    // Afficher le reste de la page
+    document.getElementById('mainContent').style.display = 'block';
+
+    document.getElementById('playerName').value = username;
+
+
+});
+
+
+
 
 // Déclarer une variable pour compter le nombre de tentatives
 let numberOfAttempts = 0;
@@ -13,6 +33,7 @@ const motusForm = document.getElementById('motusForm');
 const resDiv = document.querySelector('.res');
 // Sélectionner la div du message
 const messageDiv = document.querySelector('.message');
+
 
 motusForm.addEventListener('submit', function(event) {
     // Empêcher le comportement par défaut du formulaire
@@ -76,10 +97,23 @@ motusForm.addEventListener('submit', function(event) {
     xhr.send();
 });
 
+
+document.getElementById('linkScores').addEventListener('click', function() {
+    // Récupérer le playerName depuis l'input
+    const playerName = document.getElementById('playerName').value;
+    getScores(playerName)
+    window.location.href = `http://localhost:3001/score?playerName=${playerName}`;
+});
+
+
+
+
 // Fonction pour enregistrer le score du joueur
 function setScore(score) {
     // Récupérer le nom du joueur
     console.log("on est dans le set score du motus")
+    console.log(score)
+    console.log("avant sa a print")
     const playerName = document.getElementById('playerName').value;
     console.log("Nom du joueur")
     console.log(playerName)
@@ -92,7 +126,7 @@ function setScore(score) {
 
     // Effectuer une requête AJAX pour enregistrer le score
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/setscore', true);
+    xhr.open('POST', 'http://localhost:3001/setscore', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
         if (xhr.status === 200) {
@@ -104,26 +138,29 @@ function setScore(score) {
     xhr.onerror = function() {
         console.error('Erreur AJAX lors de l\'enregistrement du score.');
     };
+    console.log("JE VAIS ENVOYE CA")
+    console.log(JSON.stringify(scoreData))
     xhr.send(JSON.stringify(scoreData));
 }
 
 // Fonction pour récupérer le score d'un joueur
-function getScore(playerName) {
+function getScores(playerName) {
     // Effectuer une requête AJAX pour récupérer le score du joueur
     const xhr = new XMLHttpRequest();
     console.log("on est dans le get score du motus")
 
-    xhr.open('GET', `/getscore?playerName=${playerName}`, true);
+    xhr.open('GET', `http://localhost:3001/getscore?playerName=${playerName}`, true);
     xhr.onload = function() {
         if (xhr.status === 200) {
-            const score = xhr.responseText;
-            console.log(`Le score de ${playerName} est ${score}.`);
+            const playerStats = JSON.parse(xhr.responseText);
+            console.log(`Les statistiques de ${playerName} sont :`, playerStats);
+            // Utilisez ici les statistiques récupérées comme vous le souhaitez
         } else {
-            console.error('Erreur lors de la récupération du score.');
+            console.error('Erreur lors de la récupération des statistiques.');
         }
     };
     xhr.onerror = function() {
-        console.error('Erreur AJAX lors de la récupération du score.');
+        console.error('Erreur AJAX lors de la récupération des statistiques.');
     };
     xhr.send();
 }

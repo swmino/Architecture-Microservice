@@ -13,3 +13,4 @@ EXPOSE 3000
 
 # CMD pour démarrer Redis Server et l'application Node.js
 CMD ["sh", "-c", "redis-server & node static/scoreTracker.js"]
+

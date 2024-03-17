@@ -8,13 +8,16 @@
 </head>
 <body>
     <div class="mutos">Mutos</div>
-    <a class="mutos" href="http://localhost:3001/score" id="linkScores" style="display: none; font-size: 15px;">Voir les scores</a>
+
+    <button class="bouton" id="linkScores" style="display: none; font-size: 30px;">Voir les scores</button>
+
+    
         <div class="container" id="container">
         <!-- Formulaire pour entrer le nom d'utilisateur -->
         <form id="usernameForm">
-            <label for="username">Entrez votre nom d'utilisateur :</label>
+            <label for="username">Entrez votre nom d'utilisateur pour accéder à l'application motus :</label>
             <input type="text" id="playerName" name="playerName">
-            <input type="submit" value="Valider">
+            <input type="submit" value="Valider" class="btnTest">
         </form>
     </div>
 
@@ -33,21 +36,6 @@
     </div>
     
     <script src="motus.js"></script>
-    <script>
-        const usernameForm = document.getElementById('usernameForm');
-        usernameForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            console.log("on est bien rentré dans le add Event Lister");
-            const username = document.getElementById('playerName').value;
-            document.getElementById('linkScores').style.display = 'block';
-            // Cacher le formulaire pour le nom d'utilisateur
-            document.getElementById('container').style.display = 'none';
 
-            // Afficher le reste de la page
-            document.getElementById('mainContent').style.display = 'block';
-
-            document.getElementById('playerName').value = username;
-        });
-    </script>
 </body>
 </html>

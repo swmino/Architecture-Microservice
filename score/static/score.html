@@ -5,32 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Score</title>
     <link rel="stylesheet" href="index.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="mutos">Score </div>
 
-    <a class ="mutos" href="http://localhost:3000" id="linkScores" style="font-size: 15px;"></a>>Retour au jeu</a>
+    <button class="mutos" onclick="window.location.href='http://localhost:3000'" style="font-size: 30px;">Retour au jeu</button>
+
+
 
     <!-- Conteneur pour afficher les scores -->
-    <div id="mainContent">
+    <div id="scoresContainer">
+        <h1> SCORE :
+        </h1>
         <!-- Le contenu des scores sera ajouté ici via JavaScript -->
     </div>
 
     <script>
+        // Récupérer le playerName depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const playerName = urlParams.get('playerName');
+        console.log("JE SUIS DANS LE SCRIPT")
+    
         // Effectuer une requête AJAX pour récupérer les scores depuis le serveur
         $.ajax({
-            url: '/getscore', // L'URL de la route pour récupérer les scores
+            url: `/getscore?playerName=${playerName}`, // L'URL de la route pour récupérer les scores
             method: 'GET',
             //data: { playerName: 'playername' }
             success: function(scores) {
                 // Afficher les scores dans la div scoresContainer
-                $('#scoresContainer').html(scores);
+                console.log("Player name:", playerName)
+                console.log('Scores récupérés avec succès :', scores);
+                let htmlContent = `<h1> SCORE : </h1>`;
+                htmlContent += `<p>Total Words Found: ${scores.totalWordsFound}</p>`;
+                htmlContent += `<p>Total Attempts: ${scores.totalAttempts}</p>`;
+                htmlContent += `<p>Average Attempts Per Word: ${scores.averageAttemptsPerWord}</p>`;
+                $('#scoresContainer').html(htmlContent);
+                    
             },
             error: function(err) {
                 console.error('Erreur lors de la récupération des scores :', err);
             }
         });
     </script>
+    
 </body>
 </html>

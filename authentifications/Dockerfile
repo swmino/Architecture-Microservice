@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . . 
 
 RUN npm install
+RUN npm install axios jsonwebtoken express-session
 
 EXPOSE 3000
 
